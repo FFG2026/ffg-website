@@ -42,10 +42,16 @@ export default function HomePage() {
             <p>Purposeful finance for vehicles, plant and equipment—structured directly by the people providing the capital.</p>
             <div className="ffg-hero-actions"><button className="ffg-button ffg-button-blue ffg-button-large" onClick={() => setDrawerOpen(true)}>Apply for finance <Arrow /></button><Link href="/portal" className="ffg-button ffg-button-ghost ffg-button-large">Customer login</Link></div>
           </div>
-          <aside className="ffg-indication" aria-label="Example finance indication">
-            <div className="ffg-indication-top"><span><i /> Quick indication</span><b>Illustrative</b></div>
-            <div className="ffg-indication-grid"><div><span>Capital required</span><strong>£75,000</strong></div><div><span>Indicative term</span><strong>48 months</strong></div><div><span>Structure</span><strong>Hire Purchase</strong></div></div>
-          </aside>
+          <div className="ffg-capital-visual" aria-label="Example finance indication">
+            <div className="ffg-capital-word" aria-hidden="true">CAPITAL</div>
+            <aside className="ffg-indication">
+              <div className="ffg-indication-top"><span><i /> Example facility</span><b>01 / 04</b></div>
+              <div className="ffg-indication-amount"><span>Funding</span><strong>£75,000</strong><small>for a working asset</small></div>
+              <div className="ffg-indication-grid"><div><span>Term</span><strong>48 months</strong></div><div><span>Structure</span><strong>Hire Purchase</strong></div></div>
+              <button className="ffg-indication-link" onClick={() => setDrawerOpen(true)}>Build your facility <Arrow /></button>
+            </aside>
+            <div className="ffg-capital-tags" aria-hidden="true"><span>VEHICLES</span><span>PLANT</span><span>EQUIPMENT</span></div>
+          </div>
         </div>
       </section>
 
