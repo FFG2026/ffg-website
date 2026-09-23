@@ -1,16 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const mockCompanies = [
   { name: "Medway Plant Hire Ltd", number: "09214563" },
   { name: "Anderson Groundworks Ltd", number: "11087742" },
   { name: "Kent Logistics Solutions Ltd", number: "08765310" },
   { name: "Greenfield Agri Services Ltd", number: "12456709" },
-  { name: "Rochester Vehicle Rentals Ltd", number: "10983221" },
-  { name: "Medway Engineering Ltd", number: "07659912" },
 ];
+
+const Arrow = () => <span aria-hidden="true">→</span>;
 
 export default function HomePage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -18,491 +19,77 @@ export default function HomePage() {
   const [bizType, setBizType] = useState<"ltd" | "sole">("ltd");
   const [companyQuery, setCompanyQuery] = useState("");
   const [companySelected, setCompanySelected] = useState("");
-
-  const formatAmount = (n: number) => `£${n.toLocaleString("en-GB")}`;
-  const stepAmount = (delta: number) =>
-    setAmount((prev) => Math.max(10000, Math.min(1000000, prev + delta)));
-
-  const matches =
-    companyQuery.trim().length >= 2
-      ? mockCompanies.filter((c) =>
-          c.name.toLowerCase().includes(companyQuery.trim().toLowerCase())
-        )
-      : [];
+  const matches = companyQuery.trim().length >= 2
+    ? mockCompanies.filter((company) => company.name.toLowerCase().includes(companyQuery.trim().toLowerCase()))
+    : [];
 
   return (
-    <>
-      <nav>
-        <div className="nav-inner">
-          <div className="wordmark">
-            <span className="dot"></span>
-            <div>
-              FUTURE FG
-              <small>ASSET &amp; HIRE PURCHASE FINANCE</small>
-            </div>
+    <main className="ffg-home">
+      <section className="ffg-hero">
+        <Image className="ffg-hero-image" src="/industrial-finance-hero.jpg" alt="Commercial van and excavator in a British industrial yard" fill priority sizes="100vw" />
+        <div className="ffg-hero-shade" />
+        <header className="ffg-nav shell">
+          <a className="ffg-brand" href="#top" aria-label="Future Finance Group home">
+            <span className="ffg-mark"><Image src="/ffg-mark.jpg" alt="" width={28} height={34} /></span>
+            <span>FUTURE FINANCE <small>GROUP LIMITED</small></span>
+          </a>
+          <nav className="ffg-links" aria-label="Main navigation"><a href="#finance">Finance</a><a href="#assets">Assets</a><a href="#process">How it works</a><a href="#about">About</a></nav>
+          <div className="ffg-nav-actions"><Link href="/portal" className="ffg-button ffg-button-ghost">Customer login</Link><button className="ffg-button ffg-button-blue" onClick={() => setDrawerOpen(true)}>Apply now <Arrow /></button></div>
+        </header>
+        <div className="ffg-hero-content shell" id="top">
+          <div className="ffg-hero-copy">
+            <div className="ffg-kicker">Asset finance for a stronger tomorrow</div>
+            <h1>Backing the <strong>assets</strong> that build Britain.</h1>
+            <p>Straightforward asset and hire purchase finance for vans, plant, machinery and the businesses that keep Britain moving.</p>
+            <div className="ffg-hero-actions"><button className="ffg-button ffg-button-blue ffg-button-large" onClick={() => setDrawerOpen(true)}>Apply for finance <Arrow /></button><Link href="/portal" className="ffg-button ffg-button-ghost ffg-button-large">Customer login</Link></div>
           </div>
-          <div className="nav-links">
-            <a href="#products">Funding solutions</a>
-            <a href="#specialities">Specialities</a>
-            <a href="#why">Why Future FG</a>
-            <a href="#portal">Customer portal</a>
-          </div>
-          <div className="nav-right">
-            <Link href="/portal" className="btn btn-outline">
-              Customer login
-            </Link>
-            <button
-              className="btn btn-solid"
-              style={{ border: "none" }}
-              onClick={() => setDrawerOpen(true)}
-            >
-              Apply now
-            </button>
-          </div>
+          <aside className="ffg-indication" aria-label="Example finance indication">
+            <div className="ffg-indication-top"><span><i /> Quick indication</span><b>Illustrative</b></div>
+            <div className="ffg-indication-grid"><div><span>Funding required</span><strong>£75,000</strong></div><div><span>Decision</span><strong>Same day</strong></div><div><span>Structure</span><strong>Hire Purchase</strong></div></div>
+          </aside>
         </div>
-      </nav>
+      </section>
 
-      <div className="wrap">
-        <section className="hero">
-          <div className="hero-tag">Rochester, Kent &middot; Business asset finance</div>
-          <h1>
-            Finance for the assets that keep your business <em>moving</em>.
-          </h1>
-          <p>
-            Hire purchase, finance lease and loan agreements for vehicles,
-            plant and equipment — arranged directly with a lender who still
-            answers the phone.
-          </p>
-          <div className="hero-ctas">
-            <button
-              className="btn btn-solid"
-              style={{ border: "none" }}
-              onClick={() => setDrawerOpen(true)}
-            >
-              Apply for finance
-            </button>
-            <a href="#portal" className="btn btn-outline">
-              Get your settlement figure
-            </a>
-          </div>
+      <section className="ffg-proof" aria-label="Key benefits"><div className="shell ffg-proof-grid">
+        <div><span>01</span><strong>Direct lender</strong><small>Real people, clear answers</small></div><div><span>02</span><strong>£10k–£1m</strong><small>Flexible business funding</small></div><div><span>03</span><strong>UK-wide</strong><small>Based in Rochester, Kent</small></div><div><span>04</span><strong>Settlements online</strong><small>Figures when you need them</small></div>
+      </div></section>
 
-          <div className="hero-visual">
-            <div className="hero-visual-inner">
-              <div>
-                <div className="hv-label">Settlement, on demand</div>
-                <h3>
-                  See exactly what it costs to settle early — any time you
-                  need it.
-                </h3>
-              </div>
-              <div className="hv-card">
-                <div className="row">
-                  <span>Agreement</span>
-                  <span>HP113</span>
-                </div>
-                <div className="row">
-                  <span>Asset</span>
-                  <span>Ford Transit</span>
-                </div>
-                <div className="row">
-                  <span>Paid</span>
-                  <span>27 / 48</span>
-                </div>
-                <div className="total">
-                  <span className="l">Settlement</span>
-                  <span className="v">£8,214</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="stats-strip">
-          <div className="stats-grid">
-            <div className="stat">
-              <div className="num">[ X ]</div>
-              <div className="lbl">Rates from</div>
-              <div className="placeholder">add figure</div>
-            </div>
-            <div className="stat">
-              <div className="num">£[X]K–£[X]M</div>
-              <div className="lbl">Lending range</div>
-              <div className="placeholder">add figure</div>
-            </div>
-            <div className="stat">
-              <div className="num">[X] hrs</div>
-              <div className="lbl">Average turnaround</div>
-              <div className="placeholder">add figure</div>
-            </div>
-            <div className="stat">
-              <div className="num">HP &middot; FL &middot; L</div>
-              <div className="lbl">Agreement types</div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="wrap" id="products">
-        <section className="section">
-          <div className="section-head">
-            <div className="eyebrow">Funding solutions</div>
-            <h2>Three ways to fund the asset.</h2>
-            <p>
-              Whichever structure suits your business, you deal with the
-              same team from application through to settlement.
-            </p>
-          </div>
-          <div className="products-grid">
-            <div className="product-card">
-              <div className="p-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <path d="M3 12h18M3 6h18M3 18h18" />
-                </svg>
-              </div>
-              <h3>Hire Purchase</h3>
-              <p>
-                Fixed monthly instalments, with ownership of the asset
-                transferring to you once the agreement is settled in full.
-              </p>
-              <span className="learn">HP agreements &rarr;</span>
-            </div>
-            <div className="product-card">
-              <div className="p-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <path d="M4 10h16" />
-                </svg>
-              </div>
-              <h3>Finance Lease</h3>
-              <p>
-                Use the asset for an agreed term without tying up capital in
-                ownership — suited to equipment you update regularly.
-              </p>
-              <span className="learn">FL agreements &rarr;</span>
-            </div>
-            <div className="product-card">
-              <div className="p-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M12 7v5l3 3" />
-                </svg>
-              </div>
-              <h3>Business Loan</h3>
-              <p>
-                A structured loan secured against the asset being financed,
-                repaid on a schedule agreed at the outset.
-              </p>
-              <span className="learn">Loan agreements &rarr;</span>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="wrap" id="specialities">
-        <section className="section" style={{ paddingTop: 0 }}>
-          <div className="section-head">
-            <div className="eyebrow">Specialities</div>
-            <h2>Assets we finance</h2>
-          </div>
-          <div className="spec-strip">
-            <div className="spec-item">
-              <div className="s-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <rect x="2" y="8" width="14" height="8" rx="1" />
-                  <path d="M16 11h3l3 3v2h-6z" />
-                  <circle cx="6.5" cy="18.5" r="1.5" />
-                  <circle cx="17.5" cy="18.5" r="1.5" />
-                </svg>
-              </div>
-              <span>Vehicles</span>
-            </div>
-            <div className="spec-item">
-              <div className="s-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <rect x="1" y="10" width="12" height="7" rx="1" />
-                  <path d="M13 12h4l4 3v2h-8z" />
-                  <circle cx="5" cy="19" r="1.6" />
-                  <circle cx="16" cy="19" r="1.6" />
-                </svg>
-              </div>
-              <span>Commercial vehicles</span>
-            </div>
-            <div className="spec-item">
-              <div className="s-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <path d="M3 20h6l2-9-5 2v7" />
-                  <path d="M11 20l3-12 4 3v9" />
-                </svg>
-              </div>
-              <span>Plant &amp; construction</span>
-            </div>
-            <div className="spec-item">
-              <div className="s-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <circle cx="7" cy="17" r="3" />
-                  <circle cx="17" cy="17" r="2" />
-                  <path d="M4 17V9l6-2 4 4h4" />
-                </svg>
-              </div>
-              <span>Agriculture</span>
-            </div>
-            <div className="spec-item">
-              <div className="s-icon">
-                <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <path d="M9 9h6v6H9z" />
-                </svg>
-              </div>
-              <span>Machinery &amp; equipment</span>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="wrap" id="why">
-        <section className="section">
-          <div className="why-grid">
-            <div
-              className="why-visual"
-              style={{ backgroundImage: "url('/office.jpg')" }}
-            >
-              <div className="tag-caption">
-                Our office at Ordnance Yard, Upnor Road, Rochester
-              </div>
-            </div>
-            <div className="why-copy">
-              <div className="eyebrow">Why Future FG</div>
-              <h2>A finance company that still deals with you directly.</h2>
-              <p>
-                We&apos;re based in Rochester, Kent, and we arrange
-                business-purpose finance for companies and sole traders
-                who&apos;d rather speak to the person making the decision
-                than work through a call centre.
-              </p>
-              <div className="why-points">
-                <div className="why-point">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  Direct contact throughout
-                </div>
-                <div className="why-point">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  Plain, fixed figures
-                </div>
-                <div className="why-point">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  Settlement figures on demand
-                </div>
-                <div className="why-point">
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  Kent-based, UK-wide
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="wrap" id="portal">
-        <section className="section" style={{ paddingTop: 0 }}>
-          <div className="portal-band">
-            <div className="portal-inner">
-              <div>
-                <div className="eyebrow">For existing customers</div>
-                <h2>
-                  Check your settlement figure without picking up the phone.
-                </h2>
-                <p>
-                  Log in to see your current balance, your up-to-date
-                  settlement figure and our bank details — or apply for
-                  finance on another asset using the details we already
-                  hold.
-                </p>
-              </div>
-              <div className="portal-actions">
-                <Link href="/portal" className="btn btn-white">
-                  Log in to your account
-                </Link>
-                <a href="#contact" className="btn btn-ghost">
-                  Request by phone instead
-                </a>
-                <div className="portal-hint">
-                  Portal access is being rolled out — call us if yours
-                  isn&apos;t set up yet.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div className="wrap" id="contact">
-        <footer>
-          <div className="footer-top">
-            <div className="footer-brand">
-              <div className="wordmark" style={{ marginBottom: 14 }}>
-                <span className="dot"></span>
-                <div>
-                  FUTURE FG
-                  <small>ASSET &amp; HIRE PURCHASE FINANCE</small>
-                </div>
-              </div>
-              <p>
-                Future F G Limited is a hire purchase and finance company
-                based in Rochester, Kent, arranging business-purpose
-                finance for vehicles, plant and equipment.
-              </p>
-            </div>
-            <div className="footer-col">
-              <h4>Contact</h4>
-              <a href="tel:07525823547">07525 823547</a>
-              <a href="mailto:olb@ffg.finance">olb@ffg.finance</a>
-              <p>
-                No. 9 Magazine B
-                <br />
-                Ordnance Yard, Upnor Road
-                <br />
-                Rochester, Kent, ME2 4UY
-              </p>
-            </div>
-            <div className="footer-col">
-              <h4>Funding</h4>
-              <a href="#products">Hire Purchase</a>
-              <a href="#products">Finance Lease</a>
-              <a href="#products">Business Loan</a>
-            </div>
-            <div className="footer-col">
-              <h4>Company</h4>
-              <a href="#why">Why Future FG</a>
-              <a href="#portal">Customer portal</a>
-              <a href="#contact">Get in touch</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <div>&copy; 2026 Future F G Limited. Company No. 13707744.</div>
-            <div>Registered in England &amp; Wales</div>
-          </div>
-        </footer>
-      </div>
-
-      {/* APPLY DRAWER */}
-      <div
-        className={`overlay ${drawerOpen ? "open" : ""}`}
-        onClick={() => setDrawerOpen(false)}
-      ></div>
-      <div className={`drawer ${drawerOpen ? "open" : ""}`}>
-        <div className="drawer-progress">
-          <div className="fill"></div>
+      <section className="ffg-editorial shell" id="finance">
+        <div className="ffg-section-intro"><div><div className="ffg-eyebrow">Our finance solutions</div><h2>Built around the asset.<br />Structured around your business.</h2></div><p>Flexible finance for the assets that power your ambition. A common-sense approach, clear terms and direct access to the team making the decision.</p></div>
+        <div className="ffg-product-row">
+          <article><div className="ffg-product-icon">01</div><div><h3>Hire Purchase</h3><p>Own the asset from day one, with fixed monthly payments and ownership when the agreement is complete.</p><a href="#contact" aria-label="Learn about hire purchase"><Arrow /></a></div></article>
+          <article><div className="ffg-product-icon">02</div><div><h3>Finance Lease</h3><p>Spread the cost with flexible terms, keeping capital available while your business continues moving.</p><a href="#contact" aria-label="Learn about finance lease"><Arrow /></a></div></article>
+          <article><div className="ffg-product-icon">03</div><div><h3>Business Loan</h3><p>Structured funding for growth, working capital or business-purpose asset purchases.</p><a href="#contact" aria-label="Learn about business loans"><Arrow /></a></div></article>
         </div>
-        <div className="drawer-head">
-          <span className="step-lbl">Step 1 of 3</span>
-          <button
-            className="drawer-close"
-            onClick={() => setDrawerOpen(false)}
-          >
-            &times;
-          </button>
+      </section>
+
+      <section className="ffg-assets" id="assets"><div className="shell">
+        <div className="ffg-assets-head"><div><div className="ffg-eyebrow">What we fund</div><h2>Finance made for working assets.</h2></div><p>From the everyday to the specialist, we fund the tools your business needs to earn.</p></div>
+        <div className="ffg-asset-list">{["Commercial vehicles", "Plant & construction", "Agriculture", "Machinery & equipment"].map((asset, index) => <div key={asset}><span>0{index + 1}</span><strong>{asset}</strong><Arrow /></div>)}</div>
+      </div></section>
+
+      <section className="ffg-about shell" id="about">
+        <div className="ffg-about-image"><Image src="/office.jpg" alt="Future Finance Group office at Ordnance Yard in Rochester" fill sizes="(max-width: 900px) 100vw, 55vw" /></div>
+        <div className="ffg-about-copy"><div className="ffg-eyebrow">Our approach</div><h2>A finance company that still deals with you directly.</h2><p>We are based in Rochester, Kent, and provide business-purpose finance across the UK. You speak to the same practical, experienced team from your first enquiry through to the final payment.</p><ul><li>Direct contact throughout</li><li>Plain, fixed figures</li><li>Fast, commercial decisions</li><li>Settlement figures on demand</li></ul></div>
+      </section>
+
+      <section className="ffg-process" id="process"><div className="shell"><div className="ffg-eyebrow">How it works</div><h2>Three steps. One direct conversation.</h2><div className="ffg-process-grid"><div><span>01</span><h3>Tell us what you need</h3><p>The asset, the supplier and the amount you want to fund.</p></div><div><span>02</span><h3>Receive a clear decision</h3><p>We assess the proposal and set out the structure and figures.</p></div><div><span>03</span><h3>Put the asset to work</h3><p>Documents signed, supplier paid and your business moving.</p></div></div></div></section>
+
+      <section className="ffg-portal shell" id="portal"><div><div className="ffg-eyebrow">For existing customers</div><h2>Your agreement. Your figures. On demand.</h2><p>View your current balance, request an up-to-date settlement and apply for finance on another asset.</p></div><Link href="/portal" className="ffg-button ffg-button-white">Open customer portal <Arrow /></Link></section>
+
+      <footer className="ffg-footer" id="contact"><div className="shell ffg-footer-grid"><div><div className="ffg-footer-name">FUTURE FINANCE GROUP LIMITED</div><p>Business-purpose finance for vehicles, plant and equipment.</p></div><div><strong>Contact</strong><a href="tel:07525823547">07525 823547</a><a href="mailto:olb@ffg.finance">olb@ffg.finance</a></div><div><strong>Office</strong><p>No. 9 Magazine B<br />Ordnance Yard, Rochester<br />Kent, ME2 4UY</p></div></div><div className="shell ffg-footer-bottom">© 2026 Future F G Limited · Company No. 13707744 <span>Registered in England &amp; Wales</span></div></footer>
+
+      <div className={`overlay ${drawerOpen ? "open" : ""}`} onClick={() => setDrawerOpen(false)} />
+      <aside className={`drawer ${drawerOpen ? "open" : ""}`} aria-hidden={!drawerOpen}>
+        <div className="drawer-progress"><div className="fill" /></div><div className="drawer-head"><span className="step-lbl">Step 1 of 3</span><button className="drawer-close" onClick={() => setDrawerOpen(false)} aria-label="Close application">×</button></div>
+        <div className="drawer-body"><h3>Tell us about the finance you need</h3><div className="field-label"><span className="ok">✓</span> How much would you like to borrow?</div>
+          <div className="amount-row"><button className="amt-btn" onClick={() => setAmount(Math.max(10000, amount - 10000))}>−</button><input type="text" value={`£${amount.toLocaleString("en-GB")}`} readOnly /><button className="amt-btn" onClick={() => setAmount(Math.min(1000000, amount + 10000))}>+</button></div>
+          <div className="amount-minmax"><span>Min. £10,000</span><span>£1,000,000 Max.</span></div><div className="chip-row">{[10000, 25000, 50000, 100000, 250000, 500000].map((value) => <button className="chip" key={value} onClick={() => setAmount(value)}>£{value / 1000}k</button>)}</div>
+          <div className="field-label"><span className="ok">✓</span> Business type</div><div className="biz-toggle"><button className={`biz-opt ${bizType === "ltd" ? "selected" : ""}`} onClick={() => setBizType("ltd")}>Limited Company</button><button className={`biz-opt ${bizType === "sole" ? "selected" : ""}`} onClick={() => setBizType("sole")}>Sole Trader</button></div>
+          <div className="field-label"><span className="ok">✓</span> Find your business</div><div className="company-field"><input type="text" placeholder="Start typing a company name" value={companySelected || companyQuery} onChange={(event) => { setCompanySelected(""); setCompanyQuery(event.target.value); }} /><span className="search-ic">⌕</span></div>
+          <div className={`company-results ${matches.length > 0 && !companySelected ? "show" : ""}`}>{matches.map((company) => <button className="company-result" key={company.number} onClick={() => { setCompanySelected(company.name); setCompanyQuery(""); }}>{company.name}<span className="num">Company no. {company.number}</span></button>)}</div><p className="drawer-hint">We use these details to give you an initial indication. No obligation.</p><button className="drawer-cta">Continue to asset details <Arrow /></button>
         </div>
-        <div className="drawer-body">
-          <h3>Tell us about the finance you need</h3>
-
-          <div className="field-label">
-            <span className="ok">&#10003;</span> How much would you like to
-            borrow?
-          </div>
-          <div className="amount-row">
-            <button className="amt-btn" onClick={() => stepAmount(-10000)}>
-              &minus;
-            </button>
-            <input
-              type="text"
-              value={formatAmount(amount)}
-              readOnly
-            />
-            <button className="amt-btn" onClick={() => stepAmount(10000)}>
-              +
-            </button>
-          </div>
-          <div className="amount-minmax">
-            <span>Min. £10,000</span>
-            <span>£1,000,000 Max.</span>
-          </div>
-          <div className="chip-row">
-            {[10000, 25000, 50000, 100000, 250000, 500000].map((v) => (
-              <div className="chip" key={v} onClick={() => setAmount(v)}>
-                £{v / 1000}k
-              </div>
-            ))}
-          </div>
-
-          <div className="field-label">
-            <span className="ok">&#10003;</span> Business type
-          </div>
-          <div className="biz-toggle">
-            <div
-              className={`biz-opt ${bizType === "ltd" ? "selected" : ""}`}
-              onClick={() => setBizType("ltd")}
-            >
-              Limited Company
-            </div>
-            <div
-              className={`biz-opt ${bizType === "sole" ? "selected" : ""}`}
-              onClick={() => setBizType("sole")}
-            >
-              Sole trader / Partnership
-            </div>
-          </div>
-
-          <div className="field-label">Company name</div>
-          <div className="company-field">
-            <input
-              type="text"
-              placeholder="Start typing your company name"
-              value={companyQuery}
-              onChange={(e) => setCompanyQuery(e.target.value)}
-              autoComplete="off"
-            />
-            <span className="search-ic">&#128269;</span>
-          </div>
-          <div className={`company-results ${matches.length ? "show" : ""}`}>
-            {matches.map((c) => (
-              <div
-                className="company-result"
-                key={c.number}
-                onClick={() => {
-                  setCompanySelected(c.name);
-                  setCompanyQuery(c.name);
-                }}
-              >
-                {c.name}
-                <div className="num">Company No. {c.number}</div>
-              </div>
-            ))}
-          </div>
-          <div className="drawer-hint">
-            We&apos;ll look this up via Companies House and confirm your
-            registered details on the next step.
-          </div>
-
-          <button
-            className="drawer-cta"
-            onClick={() =>
-              alert(
-                "This is a working prototype — Continue would move to step 2 (asset details) once built."
-              )
-            }
-          >
-            Continue
-          </button>
-        </div>
-      </div>
-    </>
+      </aside>
+    </main>
   );
 }
