@@ -26,7 +26,6 @@ export default function HomePage() {
   return (
     <main className="ffg-home">
       <section className="ffg-hero">
-        <Image className="ffg-hero-image" src="/industrial-finance-hero.jpg" alt="Commercial van and excavator in a British industrial yard" fill priority sizes="100vw" />
         <div className="ffg-hero-shade" />
         <header className="ffg-nav shell">
           <a className="ffg-brand" href="#top" aria-label="Future Finance Group home">
@@ -38,14 +37,14 @@ export default function HomePage() {
         </header>
         <div className="ffg-hero-content shell" id="top">
           <div className="ffg-hero-copy">
-            <div className="ffg-kicker">Asset finance for a stronger tomorrow</div>
-            <h1>Backing the <strong>assets</strong> that build Britain.</h1>
-            <p>Straightforward asset and hire purchase finance for vans, plant, machinery and the businesses that keep Britain moving.</p>
+            <div className="ffg-kicker">Direct business funding · Rochester, Kent</div>
+            <h1>Capital for assets.<br /><strong>Built for business.</strong></h1>
+            <p>Purposeful finance for vehicles, plant and equipment—structured directly by the people providing the capital.</p>
             <div className="ffg-hero-actions"><button className="ffg-button ffg-button-blue ffg-button-large" onClick={() => setDrawerOpen(true)}>Apply for finance <Arrow /></button><Link href="/portal" className="ffg-button ffg-button-ghost ffg-button-large">Customer login</Link></div>
           </div>
           <aside className="ffg-indication" aria-label="Example finance indication">
             <div className="ffg-indication-top"><span><i /> Quick indication</span><b>Illustrative</b></div>
-            <div className="ffg-indication-grid"><div><span>Funding required</span><strong>£75,000</strong></div><div><span>Decision</span><strong>Same day</strong></div><div><span>Structure</span><strong>Hire Purchase</strong></div></div>
+            <div className="ffg-indication-grid"><div><span>Capital required</span><strong>£75,000</strong></div><div><span>Indicative term</span><strong>48 months</strong></div><div><span>Structure</span><strong>Hire Purchase</strong></div></div>
           </aside>
         </div>
       </section>
